@@ -820,8 +820,8 @@ const VideoCallingApp: React.FC = () => {
                       bgcolor: user === userId ? 'primary.main' : 'rgba(0, 0, 0, 0.04)',
                     },
                     '&.Mui-disabled': {
-                      bgcolor: 'action.disabledBackground',
-                      color: 'action.disabled'
+                      opacity: 0.7,
+                      bgcolor: user === userId ? 'primary.light' : 'transparent'
                     }
                   }}
                 >
@@ -835,16 +835,27 @@ const VideoCallingApp: React.FC = () => {
                   >
                     {user.charAt(0).toUpperCase()}
                   </Avatar>
-                  <ListItemText 
-                    primary={user} 
-                    secondary={user === userId ? 'You' : 'Available'}
-                    primaryTypographyProps={{
-                      fontWeight: 'bold'
-                    }}
-                    secondaryTypographyProps={{
-                      color: user === userId ? 'primary.contrastText' : 'text.secondary'
-                    }}
-                  />
+                  <Box sx={{ flexGrow: 1 }}>
+                    <Typography
+                      sx={{
+                        fontWeight: 'bold',
+                        color: user === userId ? '#ffffff' : (isDarkMode ? '#ffffff' : '#000000'),
+                        fontSize: '1rem',
+                        letterSpacing: '0.01em'
+                      }}
+                    >
+                      {user}
+                    </Typography>
+                    <Typography
+                      sx={{
+                        color: user === userId ? 'rgba(255, 255, 255, 0.9)' : (isDarkMode ? 'rgba(255, 255, 255, 0.8)' : 'rgba(0, 0, 0, 0.8)'),
+                        fontWeight: 'medium',
+                        fontSize: '0.875rem'
+                      }}
+                    >
+                      {user === userId ? 'You' : 'Available'}
+                    </Typography>
+                  </Box>
                   {user !== userId && !isCallInProgress && (
                     <Button
                       variant="contained"
